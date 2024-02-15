@@ -2,9 +2,9 @@ version: "3.5"
 
 services:
   #Irei usar um backend em golang por ser mais simples, rapido e com menos dependencias, ja que o escopo eh pequeno
-  go-form-server:
-    container_name: go-form-server
-    image: go-form-server:1.0.0
+  go-form-backend:
+    container_name: go-form-backend
+    image: go-form-backend:1.0.0
 
     environment:
       - DB_HOSTNAME=db
@@ -19,6 +19,8 @@ services:
     build:
       context: ./server/
       dockerfile: go.Dockerfile
+    networks:
+      - default
     deploy:
       resources:
         limits:
@@ -60,6 +62,8 @@ services:
       - "3000:3000"
     env_file: .env
 
+    networks:
+      - default
     #Limitando os recursos do front ja que eh apenas um formulario que sera mostrado
     deploy:
       resources:
@@ -74,10 +78,14 @@ services:
     ports:
       - "${REVERSE_PROXY_PORT}:80"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro #Montando as configuracoes do nginx no container
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro #Montando as configuracoes do nginx no container
     depends_on:
       nextjs-form-app:
         condition: service_started
+      go-form-backend:
+        condition: service_started
+    networks:
+      - default
     deploy:
       resources:
         limits:

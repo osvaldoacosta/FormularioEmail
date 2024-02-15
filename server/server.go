@@ -107,8 +107,8 @@ func main() {
 	log.Println("Connected to the database successfully!")
 	router := mux.NewRouter()
 
-	router.HandleFunc("/api/user", getUsers(db)).Methods("GET")
-	router.HandleFunc("/api/user", createUser(db)).Methods("POST")
+	router.HandleFunc("/user", getUsers(db)).Methods("GET")
+	router.HandleFunc("/user", createUser(db)).Methods("POST")
 
 	enhancedRouter := enableCORS(jsonContentTypeMiddleware(router))
 	log.Fatal(http.ListenAndServe(":8080", enhancedRouter))
