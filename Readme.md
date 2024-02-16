@@ -1,5 +1,17 @@
 # Desafio Técnico Redway Information Security
 
+
+### Sumário:
+
+- [Desafio](#desafio)
+- [O que foi utilizado nesse projeto?](#o-que-foi-utilizado-nesse-projeto)
+- [Instruções para executar a aplicação](#instruções-para-executar-a-aplicação)
+  - [Ambiente Linux](#ambiente-linux)
+  - [Ambiente Windows](#ambiente-windows)
+- [Acessando a aplicação](#acessando-a-aplicação)
+- [Configurando variáveis de ambiente](#configurando-variáveis-de-ambiente)
+
+
 ---
 
 ### Desafio:
@@ -22,7 +34,7 @@ Esse projeto foi feito visando um baixo consumo de recursos de hardware e baixo 
 1. Baixe primeiro o docker na sua distribuição linux, veja no site https://docs.docker.com/desktop/install/linux-install/
 2. Habilite o docker na sua máquina se necessário
 3. Verifique se o docker e o docker-compose estão instalados na sua máquina
-4. Execute os seguintes comandos:
+4. Execute os seguintes comandos no diretorio raiz do projeto:
 
 ```
 docker-compose down
@@ -34,14 +46,31 @@ Esses comandos irão iniciar o nosso projeto
 5. Caso tudo ocorra bem você já terá o seu servidor e a aplicação rodando
 
 ##### Ambiente Windows:
+1. Baixe primeiro o docker no windows, veja o site https://docs.docker.com/desktop/install/windows-install/, ou instale o docker diretamente utilizando o winget:
 
+```
+winget install Docker.DockerDesktop
+```
+
+2. Para as mudanças terem efeito, será necessário deslogar e logar do usuário windows
+3. Aceite os termos e finalize a instalação do docker, lembrando que é necessário que o windows hyper-v-hypervisor esteja habilitado
+4. Execute os seguintes comandos no diretorio raiz do projeto:
+
+```
+docker-compose down
+docker-compose up -d --build
+```
+
+Esses comandos irão iniciar o nosso projeto
+
+5. Caso tudo ocorra bem você já terá o seu servidor e a aplicação rodando
 ---
 
 ### Acessando a aplicação:
 
 ---
 
-- A aplicação em si ja consegue realizar a adição e a visualização dos emails. basta acessar http://localhost/ que a página web aparecerá, não é necessáio a adição das portas
+- A aplicação em si ja consegue realizar a adição e a visualização dos emails. basta acessar http://localhost/ que a página web aparecerá, não é necessário a adição das portas
 - O endpoint do servidor golang para a aplicação é o http://localhost/api/user, usando o método GET você irá obter uma lista de emails desses usuários, utilizando o post, você consegue adicionar um novo email ao banco de dados. Abaixo você irá encontrar exemplos de body e reponse para o POST e GET.
 
 ##### POST
@@ -95,4 +124,4 @@ Isso irá retornar quando não tiver nenhum usuario cadastrado no banco de dados
 
 ### Configurando variáveis de ambiente:
 
-Normalmente se omite os arquivos .env no gitignore, porém por questões de simplicidade, o .env foi adicionado, porém se necessário, é possivel alterar as portas e informações sobre o banco de dados basta alterar
+Normalmente se omite os arquivos .env no gitignore, porém por questões de simplicidade, o .env foi adicionado, caso necessário, é possivel alterar as portas e informações sobre o banco de dados, basta alterar o arquivo [.env](.env) e adicinar as informações referentes a cada tópico
